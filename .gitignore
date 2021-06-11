@@ -1,0 +1,6 @@
+__history/
+Win32/
+*.twfd
+*.twopts
+*.@@@
+*.cbproj.local
