@@ -41,12 +41,15 @@ void Warning(const UnicodeString &msg)
 	DWORD dwMode = 0;
 
 	GetConsoleMode(hConsole, &dwMode);
-	SetConsoleMode(hConsole, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+	if (SetConsoleMode(hConsole, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING)) {
+		std::wcout << BRIGHT << YELLOW << L"*** WARNING: ";
+		std::wcout << WHITE << msg << RESET << std::endl;
 
-	std::wcout << BRIGHT << YELLOW << L"*** WARNING: ";
-	std::wcout << WHITE << msg << RESET << std::endl;
-
-	SetConsoleMode(hConsole, dwMode);
+		SetConsoleMode(hConsole, dwMode);
+	} else {
+		std::wcout << L"*** WARNING: ";
+		std::wcout << msg << std::endl;
+	}
 }
 //---------------------------------------------------------------------------
 
@@ -56,11 +59,14 @@ void Error(const UnicodeString &msg)
 	DWORD dwMode = 0;
 
 	GetConsoleMode(hConsole, &dwMode);
-	SetConsoleMode(hConsole, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
+	if (SetConsoleMode(hConsole, dwMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING)) {
+		std::wcout << BRIGHT << RED << L"*** ERROR: ";
+		std::wcout << WHITE << msg << RESET << std::endl;
 
-	std::wcout << BRIGHT << RED << L"*** ERROR: ";
-	std::wcout << WHITE << msg << RESET << std::endl;
-
-	SetConsoleMode(hConsole, dwMode);
+		SetConsoleMode(hConsole, dwMode);
+	} else {
+		std::wcout << L"*** ERROR: ";
+		std::wcout << msg << std::endl;
+	}
 }
 //---------------------------------------------------------------------------

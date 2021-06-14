@@ -242,7 +242,7 @@ void WfiPrinter::InstallDriver(bool quiet)
 		if (!CreateDirectoryW(szTemp.c_str(), NULL)) {
 			err.printf(L"call to CreateDirectoryW failed. GetLastError=0x%08X", GetLastError());
 			throw Exception(err);
-        }
+		}
 
 		szInfFile = szTemp + L"\\ghostpdf.inf";
 		szCatFile = szTemp + L"\\ghostpdf.cat";
@@ -455,7 +455,7 @@ void WfiPrinter::PurgePrinterJobs()
 		if (!SetPrinter(hPrinter, 0, NULL, PRINTER_CONTROL_PURGE)) {
 			err.printf(L"call to OpenPrinterW failed. GetLastError=0x%08X", GetLastError());
 			throw Exception(err);
-        }
+		}
 	}
 	__finally {
 		free(pName);
@@ -478,10 +478,10 @@ void WfiPrinter::Install(bool quiet)
 
 	if (!IsMonitorInstalled()) {
 		AddWfiPrinterMonitor();
-        RestartSpooler();
+		RestartSpooler();
 	}
 
-    AddWfiPrinter();
+	AddWfiPrinter();
 }
 //---------------------------------------------------------------------------
 
